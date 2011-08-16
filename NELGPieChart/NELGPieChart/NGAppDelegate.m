@@ -3,7 +3,7 @@
 //  NELGPieChart
 //
 //  Created by Murali Raghuram on 8/15/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 NELG inc. All rights reserved.
 //
 
 #import "NGAppDelegate.h"
