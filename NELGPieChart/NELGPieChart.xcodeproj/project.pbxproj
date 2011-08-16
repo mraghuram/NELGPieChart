@@ -1,0 +1,259 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BDB358F013F9F5BA00FB83FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB358EF13F9F5BA00FB83FD /* UIKit.framework */; };
+		BDB358F213F9F5BA00FB83FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB358F113F9F5BA00FB83FD /* Foundation.framework */; };
+		BDB358F813F9F5BA00FB83FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDB358F613F9F5BA00FB83FD /* InfoPlist.strings */; };
+		BDB358FA13F9F5BA00FB83FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB358F913F9F5BA00FB83FD /* main.m */; };
+		BDB358FE13F9F5BA00FB83FD /* NGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB358FD13F9F5BA00FB83FD /* NGAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BDB358EB13F9F5BA00FB83FD /* NELGPieChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NELGPieChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDB358EF13F9F5BA00FB83FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BDB358F113F9F5BA00FB83FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BDB358F513F9F5BA00FB83FD /* NELGPieChart-Info.plist */ = {isa = PBXFileReference; path = "NELGPieChart-Info.plist"; sourceTree = "<group>"; };
+		BDB358F713F9F5BA00FB83FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BDB358F913F9F5BA00FB83FD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BDB358FB13F9F5BA00FB83FD /* NELGPieChart-Prefix.pch */ = {isa = PBXFileReference; path = "NELGPieChart-Prefix.pch"; sourceTree = "<group>"; };
+		BDB358FC13F9F5BA00FB83FD /* NGAppDelegate.h */ = {isa = PBXFileReference; path = NGAppDelegate.h; sourceTree = "<group>"; };
+		BDB358FD13F9F5BA00FB83FD /* NGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BDB358E813F9F5BA00FB83FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDB358F013F9F5BA00FB83FD /* UIKit.framework in Frameworks */,
+				BDB358F213F9F5BA00FB83FD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BDB358E013F9F5BA00FB83FD = {
+			isa = PBXGroup;
+			children = (
+				BDB358F313F9F5BA00FB83FD /* NELGPieChart */,
+				BDB358EE13F9F5BA00FB83FD /* Frameworks */,
+				BDB358EC13F9F5BA00FB83FD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BDB358EC13F9F5BA00FB83FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDB358EB13F9F5BA00FB83FD /* NELGPieChart.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BDB358EE13F9F5BA00FB83FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BDB358EF13F9F5BA00FB83FD /* UIKit.framework */,
+				BDB358F113F9F5BA00FB83FD /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BDB358F313F9F5BA00FB83FD /* NELGPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				BDB358FC13F9F5BA00FB83FD /* NGAppDelegate.h */,
+				BDB358FD13F9F5BA00FB83FD /* NGAppDelegate.m */,
+				BDB358F413F9F5BA00FB83FD /* Supporting Files */,
+			);
+			path = NELGPieChart;
+			sourceTree = "<group>";
+		};
+		BDB358F413F9F5BA00FB83FD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BDB358F513F9F5BA00FB83FD /* NELGPieChart-Info.plist */,
+				BDB358F613F9F5BA00FB83FD /* InfoPlist.strings */,
+				BDB358F913F9F5BA00FB83FD /* main.m */,
+				BDB358FB13F9F5BA00FB83FD /* NELGPieChart-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BDB358EA13F9F5BA00FB83FD /* NELGPieChart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDB3590113F9F5BA00FB83FD /* Build configuration list for PBXNativeTarget "NELGPieChart" */;
+			buildPhases = (
+				BDB358E713F9F5BA00FB83FD /* Sources */,
+				BDB358E813F9F5BA00FB83FD /* Frameworks */,
+				BDB358E913F9F5BA00FB83FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NELGPieChart;
+			productName = NELGPieChart;
+			productReference = BDB358EB13F9F5BA00FB83FD /* NELGPieChart.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BDB358E213F9F5BA00FB83FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = BDB358E513F9F5BA00FB83FD /* Build configuration list for PBXProject "NELGPieChart" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BDB358E013F9F5BA00FB83FD;
+			productRefGroup = BDB358EC13F9F5BA00FB83FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BDB358EA13F9F5BA00FB83FD /* NELGPieChart */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BDB358E913F9F5BA00FB83FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDB358F813F9F5BA00FB83FD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BDB358E713F9F5BA00FB83FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDB358FA13F9F5BA00FB83FD /* main.m in Sources */,
+				BDB358FE13F9F5BA00FB83FD /* NGAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BDB358F613F9F5BA00FB83FD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDB358F713F9F5BA00FB83FD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BDB358FF13F9F5BA00FB83FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BDB3590013F9F5BA00FB83FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BDB3590213F9F5BA00FB83FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NELGPieChart/NELGPieChart-Prefix.pch";
+				INFOPLIST_FILE = "NELGPieChart/NELGPieChart-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BDB3590313F9F5BA00FB83FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NELGPieChart/NELGPieChart-Prefix.pch";
+				INFOPLIST_FILE = "NELGPieChart/NELGPieChart-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BDB358E513F9F5BA00FB83FD /* Build configuration list for PBXProject "NELGPieChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDB358FF13F9F5BA00FB83FD /* Debug */,
+				BDB3590013F9F5BA00FB83FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDB3590113F9F5BA00FB83FD /* Build configuration list for PBXNativeTarget "NELGPieChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDB3590213F9F5BA00FB83FD /* Debug */,
+				BDB3590313F9F5BA00FB83FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BDB358E213F9F5BA00FB83FD /* Project object */;
+}
