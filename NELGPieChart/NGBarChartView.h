@@ -6,6 +6,10 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+//Bar Chart View Header File
+//******
+//******
+
 #import <UIKit/UIKit.h>
 
 typedef enum{
@@ -26,6 +30,7 @@ typedef enum{
 - (NSInteger) numberOfBarsInBarChartView:(NGBarChartView *)barChartView;
 - (float) barChartView:(NGBarChartView *)barChartView heightForBarAtIndex:(NSInteger)index;
 - (float) maximumBarHeightInBarChartView:(NGBarChartView *)barChartView;
+
 @optional
 
 -(NSString *) barChartView:(NGBarChartView*)barChartView titleForBarAtIndex:(NSInteger)index;
@@ -59,7 +64,9 @@ typedef enum{
 //To determine if the top portion of the bar is rounded
 @property (nonatomic) BOOL barItemRoundedTop;
 
-
+@property (nonatomic) NSInteger barItemTitleHeight;
+@property (nonatomic, strong) UIColor *barItemSelectedColor;
+@property (nonatomic, strong) UIColor *barItemColor;
 - (id) initWithFrame:(CGRect)frame style:(NGBarChartViewStyle)style;
 
 @end
