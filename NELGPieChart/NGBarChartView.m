@@ -187,6 +187,7 @@
 	gridXAxisEnd.y = self.bounds.size.height - Y_GRIDLINE_OFFSET - self.barItemTitleHeight - 10; 	
 	
 	
+	//** draw vertical axis
 	UIBezierPath *verticalLine = [UIBezierPath bezierPath];
 	[verticalLine moveToPoint:gridYAxisStart];
 	[verticalLine addLineToPoint:gridYAxisEnd];
@@ -194,6 +195,7 @@
 	//verticalLine.usesEvenOddFillRule = YES;
 	[verticalLine stroke];
 	
+	//** draw horizontal axis
 	UIBezierPath *horizontalLine = [UIBezierPath bezierPath];
 	[horizontalLine moveToPoint:gridXAxisStart];
 	[horizontalLine addLineToPoint:gridXAxisEnd];
@@ -211,76 +213,72 @@
 	int numberOfBarItems = [self.dataSource numberOfBarsInBarChartView:self];
 	for (int barItemIndex=0; barItemIndex < numberOfBarItems ; barItemIndex++) {
 		
-		
-		CGRect barItem = [self calculateBarRectForBarItemHeight:[self.dataSource barChartView:self heightForBarAtIndex:barItemIndex] withNumberOfBarItems:numberOfBarItems atBarItemIndex:barItemIndex];
+		//** Step 1 - getting the overall dimension of the bar at index = barItemIdex
+		CGRect overallRectForBarItem = [self calculateBarRectForBarItemHeight:[self.dataSource barChartView:self heightForBarAtIndex:barItemIndex] withNumberOfBarItems:numberOfBarItems atBarItemIndex:barItemIndex];
 	
 		
+		//** step 2 - Creating a new shape layer
+		CAShapeLayer *barItemShape = [CAShapeLayer layer];
 
-		CAShapeLayer *shape = [CAShapeLayer layer];
-
-		shape.bounds = CGRectMake(0, 0, barItem.size.width, barItem.size.height);
-		shape.anchorPoint = CGPointMake(0, 1);
-		shape.position = barItem.origin;
+		//** step 3 - setting up the shape layer
+		//** setting bounds of the shape layer = to the width and height recieved above in step 1
+		barItemShape.bounds = CGRectMake(0, 0, overallRectForBarItem.size.width, overallRectForBarItem.size.height);
+		//** setting the anchor point to the left bottom, so that the reference point for position is bottom left
+		barItemShape.anchorPoint = CGPointMake(0, 1);
+		//** setting the position to the origin of the rect received in step 1.
+		barItemShape.position = overallRectForBarItem.origin;
 		
-		CGRect barItemRect = CGRectMake(0, 0, shape.bounds.size.width, shape.bounds.size.height);
+		//** step 4 - define the rect to be used by the bezier path to draw.
+		CGRect barItemRect = CGRectMake(0, 0, barItemShape.bounds.size.width, barItemShape.bounds.size.height);
+		
+		//** step 5 - create a new bezier path.
 		UIBezierPath *barItemPath;
-		if (self.barItemRoundedTop) 
-			barItemPath = [UIBezierPath bezierPathWithRoundedRect:barItemRect byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake((barItemRect.size.width / BAR_ITEM_CORNER_RADIUS_OFFSET), (barItemRect.size.width/BAR_ITEM_CORNER_RADIUS_OFFSET))];
-		else
-			barItemPath = [UIBezierPath bezierPathWithRect:barItemRect];
-
-		shape.path = barItemPath.CGPath;
-		shape.strokeColor = [UIColor whiteColor].CGColor;
-		if(self.previousBarItemTouched!=nil && [self.previousBarItemTouched.name intValue] == barItemIndex)
-			shape.fillColor = self.barItemSelectedColor.CGColor;
-		else
-			shape.fillColor = self.barItemColor.CGColor;// [UIColor colorWithRed:0.3*0.2*barItemIndex green:0.3*0.2*barItemIndex blue:0.3*0.2*barItemIndex alpha:1.0].CGColor;
-		shape.name = [NSString stringWithFormat:@"%d",barItemIndex];
-		[self.layer addSublayer:shape];
 		
-				
-		[self drawTitleForBarItemAtIndex:barItemIndex inRect:CGRectMake(barItem.origin.x,barItem.origin.y, barItem.size.width,self.barItemTitleHeight)];
+		//** step 6 - draw the barItem rect
+		
+		
+		if (self.barItemRoundedTop) {
+			//** if the barItem should be rounded at the top, draw a bezier path with rounded corners on top left and right. Use the radius offset.
+			barItemPath = [UIBezierPath bezierPathWithRoundedRect:barItemRect byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake((barItemRect.size.width / BAR_ITEM_CORNER_RADIUS_OFFSET), (barItemRect.size.width/BAR_ITEM_CORNER_RADIUS_OFFSET))];
+		}
+		else{
+			//** just draw a plain rect
+			barItemPath = [UIBezierPath bezierPathWithRect:barItemRect];
+		}
+
+		//** step 7 - Finish setting up the new layer.
+		//** set the path for the new shape = the bezier path
+		barItemShape.path = barItemPath.CGPath;
+		
+		//** setup stroke color to white
+		//@todo: eventually the delegate should be able to set this.
+		barItemShape.strokeColor = [UIColor whiteColor].CGColor;
+		
+		//** Upon redraw, such as after device rotation. See if any of the barItem was selected. If it was, then after redraw, the color of the selected item should be = barItemSelectedColor
+		if(self.previousBarItemTouched!=nil && [self.previousBarItemTouched.name intValue] == barItemIndex){
+			//** if there was a previousBarItem then figure out the index of the item and set the color = selected color.
+			barItemShape.fillColor = self.barItemSelectedColor.CGColor;
+			
+			//** now since a new shape has been created, the previous item should be = this new shape
+			self.previousBarItemTouched = barItemShape;
+		}
+		else{
+			//** if no bar was selected, set the color to barItemColor
+			barItemShape.fillColor = self.barItemColor.CGColor;
+		}
+		
+		//** set the name of the layer to barItemIndex for identification purpose
+		barItemShape.name = [NSString stringWithFormat:@"%d",barItemIndex];
+		
+		//** step 8 - add the new shape as a sublayer to the view's layer.
+		[self.layer addSublayer:barItemShape];
+		
+		//** step 9 - draw the title string		
+		[self drawTitleForBarItemAtIndex:barItemIndex inRect:CGRectMake(overallRectForBarItem.origin.x,overallRectForBarItem.origin.y, overallRectForBarItem.size.width,self.barItemTitleHeight)];
 		 
 	}
 
 	CGContextRestoreGState(ctx);
-
-/*	for (int i = 0; i<6; i++) {
-		UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 30, 100)];
-		CAShapeLayer *shape = [CAShapeLayer layer];
-		
-		shape.bounds = CGRectMake(0, 0, 30, 100);
-		shape.position = CGPointMake(20 + 35 * i, self.bounds.size.height - 20);
-		shape.path = path.CGPath;
-		shape.strokeColor = [UIColor whiteColor].CGColor;
-		shape.fillColor = [UIColor grayColor].CGColor;
-		shape.name = @"ShapeLayer";
-		[self.layer addSublayer:shape];
-	}
-	*/
-
-	
-	/*	UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 50, 100)];
-	CAShapeLayer *shape = [CAShapeLayer layer];
-	
-	shape.bounds = CGRectMake(0, 0, 50, 100);
-	shape.position = CGPointMake(80, 50);
-	shape.path = path.CGPath;
-	shape.strokeColor = [UIColor blackColor].CGColor;
-	shape.fillColor = [UIColor grayColor].CGColor;
-	shape.name = @"ShapeLayer";
-	[self.layer addSublayer:shape];
-	
-	UIBezierPath *path1 = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 100, 50)];
-	CAShapeLayer *shape1 = [CAShapeLayer layer];
-	shape1.bounds = CGRectMake(0, 0, 100, 50);
-	shape1.position = CGPointMake(200, 40);
-	shape1.path = path1.CGPath;
-	shape1.strokeColor = [UIColor blackColor].CGColor;
-	shape1.fillColor = [UIColor greenColor].CGColor;
-	shape1.name = @"ShapeLayer2";
-	[self.layer addSublayer:shape1];	
- */
 
 }
 
@@ -288,6 +286,7 @@
 					  withNumberOfBarItems:(NSInteger)numberOfItems
 							atBarItemIndex:(NSInteger)index
 {
+	
 	CGRect barRect;
 	float convertedBarHeight;
 	CGPoint barPosition;
@@ -303,10 +302,18 @@
 	float allowableMaxWidth = self.bounds.size.width - X_GRIDLINE_OFFSET * 2 - BARCHART_X_PADDING;
 	barWidth = allowableMaxWidth / numberOfItems;
 	
-	barPosition.y = self.bounds.size.height - Y_GRIDLINE_OFFSET - self.barItemTitleHeight - 10;
+	//**** calculating the x & y position of the barItem at index
+	
+	//10 subtracted so that bar aligns exactly on top of x-axis.
+	barPosition.y = self.bounds.size.height - Y_GRIDLINE_OFFSET - self.barItemTitleHeight - 10; 
+	
+	//adding 10 to offset the bar from the y-axis.
 	barPosition.x = X_GRIDLINE_OFFSET + 10 + barWidth * index;
 	
+	//****
+	
 	barRect = CGRectMake(barPosition.x, barPosition.y, barWidth, convertedBarHeight);
+	
 	
 	return barRect;
 }
@@ -327,7 +334,6 @@
 	float allowableMaxHeight = self.bounds.size.height - Y_GRIDLINE_OFFSET * 2 - BARCHART_Y_PADDING - self.barItemTitleHeight;
 	
 	int gridLineStepValue = rint(maxBarHeight / NUM_OF_GRIDLINES);
-	CAShapeLayer *gridLineLayer;
 	UIBezierPath *gridLinePath = [UIBezierPath bezierPath];
 	UIColor *gridColor = [UIColor lightGrayColor];
 	[gridColor setStroke];

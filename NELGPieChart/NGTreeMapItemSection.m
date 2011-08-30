@@ -89,21 +89,33 @@
 	CGRect b = visitor.layerToRender.bounds;
 //	NSLog(@"layer bounds %f,%f,%f,%f",b.origin.x, b.origin.y, b.size.width, b.size.height);
 //	NSLog(@"name %@",self.title);
-	CALayer *layer= [visitor visitTreeMapSection:self usingLayer:visitor.layerToRender];
+	NSLog(@"-------In Accept Item Visitor-------");
+
+	//	NSLog(@"-------Layer to Render %@-------",self.itemLayer.name);
+
+	CALayer *layer= [visitor visitTreeMapSection:self usingLayer:self.itemLayer];
 	
 	NSUInteger index = 0;
 	for (id<NGTreeMapItem> child in children_){
-		CALayer *sublayer = [layer.sublayers objectAtIndex:index];
-		sublayer.backgroundColor = child.color.CGColor;
+		CALayer *cl = [layer.sublayers objectAtIndex:index];
+		cl.backgroundColor = child.color.CGColor;
+
+		//		NSLog(@"sublayer name = %@", cl.name);
+		child.itemLayer = cl;
+		index++;
+	}
+	for (id<NGTreeMapItem> child in children_){
+//		CALayer *sublayer = [layer.sublayers objectAtIndex:index];
+//		child.itemLayer = sublayer;
+//		sublayer.backgroundColor = child.color.CGColor;
 		//	NSLog(@"sub layer name %@",sublayer.name);
 
-		visitor.layerToRender = sublayer;
-		NSLog(@"Layer to Render %@ for Section %@",sublayer.name, child.title);
+		//	visitor.layerToRender = sublayer;
+		//		NSLog(@"Layer to Render %@ for Section %@",self.itemLayer.name, child.title);
 
 		//@todo: sending the layer into the message seems redundant, since we are setting the propoerty on visitor anyway
 		//visitor should be able to use this internally.
 		[child acceptTreeMapItemVisior:visitor];
-		index++;
 	}
 	
 }

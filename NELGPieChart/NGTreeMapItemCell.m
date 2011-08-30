@@ -26,5 +26,5 @@
 - (CGFloat) sumofColorSizeForAllChildCells {return  self.colorSize;}
 - (NSEnumerator *) enumerator {return  nil;};
 - (void) acceptTreeMapItemVisior:(id <NGTreeMapItemVisitor> ) visitor {return;}
-- (UIColor *) color{ return nil;}// [UIColor clearColor];}
+//- (UIColor *) color{ return nil;}// [UIColor clearColor];}
 @end

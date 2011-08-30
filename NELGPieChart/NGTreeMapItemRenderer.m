@@ -46,7 +46,15 @@
 	while ((childItem = [section childItemAtIndex:index++])) {
 		[items addObject:[NSNumber numberWithFloat:[childItem sumOfRectSizeForAllChildCells]]];
 	}
-	return [layout layoutItems:items inLayer:layer];
+	
+	CALayer *renderedLayer = [layout layoutItems:items inLayer:layer];
+//		index = 0;
+//		while ((childItem = [section childItemAtIndex:index++])) {
+//			childItem.itemLayer = [renderedLayer.sublayers objectAtIndex:index];
+//			NSLog(@"Layer to Render %@ for Section %@",childItem.itemLayer.name, section.title);
+//	
+//		}
+	return renderedLayer;
 	
 }
 

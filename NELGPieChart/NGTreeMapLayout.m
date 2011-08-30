@@ -203,9 +203,13 @@
 	CGFloat sumOfItems = [self sum:treeMapItems atStart:0 toEnd:treeMapItems.count -1];
 	
 	NSMutableArray *layoutItemsArray = [[NSMutableArray alloc] initWithCapacity:treeMapItems.count];
-	NSLog(@"-------Print values -------");
-	for (NSNumber *value in treeMapItems){
-		NSLog(@"Item %d",[value intValue]);
+	
+	NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO selector:@selector(compare:)];
+	NSArray* sortedArray = [treeMapItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	
+	NSLog(@"------- in LayoutItems -------");
+	for (NSNumber *value in sortedArray){
+		//		NSLog(@"Item %d",[value intValue]);
 		[layoutItemsArray addObject:[NSNumber numberWithFloat:(([value floatValue] * totalAreaInPoints) / sumOfItems)]];
 	}
 	self.itemRects = [[NSMutableArray alloc] initWithCapacity:5];
@@ -214,7 +218,7 @@
 	//return self.itemRects;
 	
 	if (self.itemRects.count > 0) {
-		NSUInteger *c = self.itemRects.count;
+		int c = self.itemRects.count;
 		NSLog(@"Total Items Drawn %d", self.itemRects.count);
 		NSUInteger index = 0;
 		for (NSValue *value in self.itemRects){
@@ -224,14 +228,14 @@
 			UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, rect.size.width, rect.size.height)];
 			//			NSLog(@"%f,%f,%f,%f",rect.origin.x, rect.origin.y,rect.size.width,rect.size.height);
 			treeMapLayer.bounds = CGRectMake(0, 0, rect.size.width, rect.size.height);
-			NSLog(@"%f",[[treeMapItems objectAtIndex:index] doubleValue]);
-			treeMapLayer.name =[NSString stringWithFormat:@"%f", [[treeMapItems objectAtIndex:index] doubleValue]];
+			NSLog(@"%f",[[sortedArray objectAtIndex:index] doubleValue]);
+			treeMapLayer.name =[NSString stringWithFormat:@"%f", [[sortedArray objectAtIndex:index] doubleValue]];
 			treeMapLayer.anchorPoint = CGPointZero;
 			treeMapLayer.position = rect.origin;//[self convertPoint:rect1.origin toView:self.superview];
 			treeMapLayer.path = path.CGPath;
 			treeMapLayer.strokeColor = [UIColor darkGrayColor].CGColor;
 			treeMapLayer.fillColor = layer.backgroundColor;
-			treeMapLayer.lineWidth = 1.0;
+			treeMapLayer.lineWidth = 4.0;
 			treeMapLayer.backgroundColor  = [UIColor yellowColor].CGColor;
 			
 			CATextLayer *lbl = [CATextLayer layer];
@@ -244,11 +248,12 @@
 			lbl.wrapped = YES;
 			lbl.bounds = CGRectMake(0, 0, rect.size.width, rect.size.height * 0.2);
 			lbl.position = CGPointMake(0, rect.size.height/2 - (rect.size.height * 0.1));
-			lbl.fontSize = 14;
+			lbl.fontSize = 20;
 			[treeMapLayer addSublayer:lbl];
 
 			[layer insertSublayer:treeMapLayer atIndex:index];
-			//	[layer addSublayer:treeMapLayer];
+			//[layer addSublayer:treeMapLayer];
+			index++;
 		}
 		
 	}
